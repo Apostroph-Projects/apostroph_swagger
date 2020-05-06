@@ -1,0 +1,346 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Apostroph Group REST API",
+    "description": "<h2>Einleitung</h2> <p style='font-size:12px'>Das folgende Dokument beschreibt die REST Service Schnittstelle für myApostroph und einem externen Partner oder Kunden. Nachfolgend werden allgemeine Informationen zur Service beschreiben und dann die konkrete technische Implementierung.</p> <hr> <h2> Allgemeines </h2> <p style='font-size:12px'>Dieser Service dient dazu, dass ein externer Partner oder Kunde von Apostroph Aufträge direkt via „Internet“ im ERP System Apos erstellen und bei Fertigstellung des Auftrages diesen auch abholen kann. Die Realisierung ist mittels ein REST Services realisiert. </p> <hr> <h2> Wissenswertes </h2>  <li style='font-size:12px'> In der aktuellen Version kann nur eine Übersetzung erstellt werden. Bspw. von „de“ nach „en“, aber nicht von „de“ nach „en“ und von „de“ nach „fr“.</li> <li style='font-size:12px'>Zusätzlich zu den Auftragsinformationen können 2 Dateien übermittelt werden.  o Datei mit Endung xliff (kann erweitert werden) o Datei mit Endung tmx Beide Dateien müssen im Zip Format übertragen/geliefert werden</li> <li style='font-size:12px'>Die Initialisierung des Services passiert immer von Seite „externer Partner“. Dieser Service des Partners liefert Daten und holt auch wieder Daten ab</li> <li style='font-size:12px'>Pro Auftrag muss immer eine Apos Kundennummer mitgegeben werden, so kann der Auftrag dem korrekten Kunden zugeordnet werden. Diese Nummern müssen auf Seite externer Partner bekannt sein </li> <hr> <h2> Service Beschreibung </h2> <p style='font-size:12px'><u>Servicetyp</u>: REST</p> <p style='font-size:12px'> <u>Serialisierung</u>: JSON </p> <p style='font-size:12px'> <u>Hosting</u>: HTTPS </p> <p style='font-size:12px'> <u>Firewall</u>: Die Firewall auf dem Server sollte wenn möglich auf einen IP Range oder auf einen IP Range eingeschränkt werden können Authentifizierung: Sämtliche Methoden sind mittels HTTP Basic Authentication geschützt. Bei jedem Serviceaufruf müssen Username und Passwort im RequestHeader mitgegeben werden. (Authorization: Basic).  </p> <hr>",
+    "contact": {
+      "url": "https://apostroph.ch"
+    }
+  },
+  "host": "portal.apostroph.ch",
+  "basePath": "/rest/v1",
+  "securityDefinitions": {
+    "auth": {
+      "type": "basic"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/translations": {
+      "get": {
+        "description": "Liefert alle laufenden Übersetzungen zurück. Der mögliche Status der Übersetzung ist im Datentyp OrderState beschrieben. Für Übersetzungen, welche bereits übersetzt und geliefert wurden, gilt die Einschränkung, dass sie nur bis 10 Tage nach der Abholung durch den externen Partner aufgelistet werden. Diese Methode ist dazu gedacht, dass sie der externe Partner mittels Polling aufrufen kann und auf eine Veränderung des Status wie bspw. WORKING ändert zu FINISHED reagieren kann.",
+        "summary": "Translations",
+        "tags": [
+          "Translation"
+        ],
+        "operationId": "Translations",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TranslationStatus"
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/translations/{translationId}": {
+      "get": {
+        "description": "Liefert die übersetzte Datei der Übersetzung mit der angegeben ID zurück. Nur Übersetzungen im Status FINISHED oder DELIVERED.",
+        "summary": "Translation by ID",
+        "tags": [
+          "Translation"
+        ],
+        "operationId": "TranslationbyID",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "translationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID der Übersetzung"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/translations/": {
+      "post": {
+        "description": "Erstellt eine neue Übersetzung. ",
+        "summary": "Create new Translation",
+        "tags": [
+          "Translation"
+        ],
+        "operationId": "CreatenewTranslation",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "translationData",
+            "in": "body",
+            "required": true,
+            "description": "Daten zur Übersetzung",
+            "schema": {
+              "$ref": "#/definitions/translationData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/TranslationStatus"
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/translations/{translationId}/reject": {
+      "post": {
+        "description": "Weist eine Übersetzung aus technischen Gründen zurück. Diese Methode kann aufgerufen werden, wenn eine Übersetzung vom externen Partner abgeholt wurde, aber die übersetzte Datei nicht gelesen werden kann. Auf Seite Apostroph wird dies beim Auftrag eingetragen und eine Mail an den PrM versendet.",
+        "summary": "Reject Translation",
+        "tags": [
+          "Translation"
+        ],
+        "operationId": "RejectTranslation",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "translationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID der Übersetzung"
+          },
+          {
+            "name": "rejectInfoData",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/rejectInfoData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/translations/{translationId}/cancel": {
+      "post": {
+        "description": "Storniert eine laufende Übersetzung",
+        "summary": "Cancel Translation",
+        "tags": [
+          "Translation"
+        ],
+        "operationId": "CancelTranslation",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "translationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID der Übersetzung"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/dev/status": {
+      "get": {
+        "summary": "Status",
+        "tags": [
+          "Service Status"
+        ],
+        "operationId": "Status",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "translationData": {
+      "title": "translationData",
+      "type": "object",
+      "properties": {
+        "DesiredDeadline": {
+          "description": "Datum",
+          "example": "DATETIME_STAMP",
+          "type": "string"
+        },
+        "Comment": {
+          "description": "Bemerkungen",
+          "example": "no comment",
+          "type": "string"
+        },
+        "IsRevision": {
+          "description": "Ist es eine Nachübersetzung (wenn ja: tmx file muss mitgeliefert werden)",
+          "example": false,
+          "type": "boolean"
+        },
+        "SourceLanguage": {
+          "description": "2 Stellig",
+          "example": "en",
+          "type": "string"
+        },
+        "TargetLanguage": {
+          "description": "2 Stellig",
+          "example": "de",
+          "type": "string"
+        },
+        "ProjectTitle": {
+          "description": "50 Zeichen",
+          "example": "first project",
+          "type": "string"
+        },
+        "IsConfidential": {
+          "description": "Kein Mussfeld",
+          "example": false,
+          "type": "boolean"
+        },
+        "CustomerId": {
+          "description": "KundenNr Apos",
+          "example": 12345,
+          "type": "integer",
+          "format": "int32"
+        },
+        "SourceDocumentContent": {
+          "description": "xliff file zipped (base64 encoded)",
+          "example": "Base64",
+          "type": "string"
+        },
+        "MetadataDocumentContent": {
+          "description": "tmx file zipped (base64 encoded)",
+          "example": "Base64",
+          "type": "string"
+        },
+        "ReferenceTranslationId": {
+          "description": "TranslationId der Erstübersetzung (Muss bei einer Nachübersetzung mitgeliefert werden, muss sonst leer sein)",
+          "example": "translationID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "DesiredDeadline",
+        "Comment",
+        "IsRevision",
+        "SourceLanguage",
+        "TargetLanguage",
+        "ProjectTitle",
+        "IsConfidential",
+        "CustomerId",
+        "SourceDocumentContent",
+        "MetadataDocumentContent",
+        "ReferenceTranslationId"
+      ]
+    },
+    "rejectInfoData": {
+      "title": "rejectInfoData",
+      "description": "",
+      "type": "object",
+      "properties": {
+        "RejectInfo": {
+          "description": "Grund fürs reject",
+          "type": "string"
+        },
+        "TargetDocumentContent": {
+          "description": "xliff file (base64 encoded)",
+          "type": "string"
+        }
+      },
+      "required": [
+        "RejectInfo",
+        "TargetDocumentContent"
+      ]
+    },
+    "OrderState": {
+      "title": "OrderState",
+      "description": "",
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "WORKING",
+        "FINISHED",
+        "DELIVERED",
+        "CANCELLED"
+      ]
+    },
+    "TranslationStatus": {
+      "title": "TranslationStatus",
+      "description": "",
+      "type": "object",
+      "properties": {
+        "TranslationId": {
+          "description": "ID der Übersetzung",
+          "type": "string"
+        },
+        "State": {
+          "$ref": "#/definitions/OrderState"
+        }
+      },
+      "required": [
+        "TranslationId",
+        "State"
+      ]
+    }
+  },
+  "security": [
+    {
+      "auth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Translation",
+      "description": "Alle Funktionen, die mit dem Übersetzungsprojekt zusammenhängen"
+    }
+  ]
+}
