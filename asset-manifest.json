@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/apostroph_swagger/static/css/main.d1b05096.chunk.css",
+    "main.js": "/apostroph_swagger/static/js/main.66afd4eb.chunk.js",
+    "main.js.map": "/apostroph_swagger/static/js/main.66afd4eb.chunk.js.map",
+    "runtime-main.js": "/apostroph_swagger/static/js/runtime-main.4f4b1fa3.js",
+    "runtime-main.js.map": "/apostroph_swagger/static/js/runtime-main.4f4b1fa3.js.map",
+    "static/css/2.e806ff4a.chunk.css": "/apostroph_swagger/static/css/2.e806ff4a.chunk.css",
+    "static/js/2.14c6018c.chunk.js": "/apostroph_swagger/static/js/2.14c6018c.chunk.js",
+    "static/js/2.14c6018c.chunk.js.map": "/apostroph_swagger/static/js/2.14c6018c.chunk.js.map",
+    "index.html": "/apostroph_swagger/index.html",
+    "precache-manifest.d1b1b31d796fb7bfdf5e16870a56cf0b.js": "/apostroph_swagger/precache-manifest.d1b1b31d796fb7bfdf5e16870a56cf0b.js",
+    "service-worker.js": "/apostroph_swagger/service-worker.js",
+    "static/css/2.e806ff4a.chunk.css.map": "/apostroph_swagger/static/css/2.e806ff4a.chunk.css.map",
+    "static/css/main.d1b05096.chunk.css.map": "/apostroph_swagger/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.14c6018c.chunk.js.LICENSE.txt": "/apostroph_swagger/static/js/2.14c6018c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4f4b1fa3.js",
+    "static/css/2.e806ff4a.chunk.css",
+    "static/js/2.14c6018c.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.66afd4eb.chunk.js"
+  ]
+}
