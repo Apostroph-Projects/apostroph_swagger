@@ -40,7 +40,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Erfolgreich",
             "schema": {
               "type": "array",
               "items": {
@@ -48,6 +48,9 @@
               }
             },
             "headers": {}
+          },
+          "403":{
+            "description":"Access denied"
           }
         }
       }
@@ -80,6 +83,15 @@
               "type": "object"
             },
             "headers": {}
+          },
+          "204":{
+            "description":"Noch kein übersetztes XLIFF Dokument vorhanden."
+          },
+          "403":{
+            "description":"Access denied"
+          },
+          "404":{
+            "description":"Die Übersetzung mit der angegebenen translationId wurde nicht gefunden."
           }
         }
       }
@@ -109,11 +121,17 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Erfolgreich",
             "schema": {
               "$ref": "#/definitions/TranslationStatus"
             },
             "headers": {}
+          },
+          "403":{
+            "description":"Access denied"
+          },
+          "404":{
+            "description":"Ungültige Parameter"
           }
         }
       }
@@ -150,8 +168,14 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Erfolgreich",
             "headers": {}
+          },
+          "403":{
+            "description":"Access denied"
+          },
+          "404":{
+            "description":"Zurückweisung wurde nicht angenommen"
           }
         }
       }
@@ -179,8 +203,14 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Erfolgreich",
             "headers": {}
+          },
+          "403":{
+            "description":"Access denied"
+          },
+          "404":{
+            "description":"Ungültige Parameter"
           }
         }
       }
@@ -199,8 +229,11 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Erfolgreich",
             "headers": {}
+          },
+          "403":{
+            "description":"Access denied"
           }
         }
       }
