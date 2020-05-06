@@ -332,7 +332,6 @@
       ]
     },
     "OrderState": {
-      "title": "OrderState",
       "description": "",
       "type": "string",
       "enum": [
