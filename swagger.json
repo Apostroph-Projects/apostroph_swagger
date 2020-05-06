@@ -275,11 +275,8 @@
         "SourceLanguage",
         "TargetLanguage",
         "ProjectTitle",
-        "IsConfidential",
         "CustomerId",
-        "SourceDocumentContent",
-        "MetadataDocumentContent",
-        "ReferenceTranslationId"
+        "SourceDocumentContent"
       ]
     },
     "rejectInfoData": {
