@@ -290,12 +290,12 @@
         "SourceDocumentContent": {
           "description": "xliff file zipped (base64 encoded)",
           "example": "Base64",
-          "type": "string"
+          "type": "base64"
         },
         "MetadataDocumentContent": {
           "description": "tmx file zipped (base64 encoded)",
           "example": "Base64",
-          "type": "string"
+          "type": "base64"
         },
         "ReferenceTranslationId": {
           "description": "TranslationId der Erstübersetzung (Muss bei einer Nachübersetzung mitgeliefert werden, muss sonst leer sein)",
