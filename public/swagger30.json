@@ -286,7 +286,7 @@
             },
             "403": {
               "description": "Access denied"
-            },
+            }
           },
           "deprecated": false,
           "servers": [
