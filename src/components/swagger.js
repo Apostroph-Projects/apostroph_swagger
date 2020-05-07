@@ -28,7 +28,7 @@ SwaggerUI.propTypes = {
 };
 
 SwaggerUI.defaultProps = {
-    url: `swagger.json`
+    url: `swagger30.json`
 };
 
 export default SwaggerUI;
