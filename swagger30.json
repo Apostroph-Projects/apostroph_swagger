@@ -203,7 +203,7 @@
           },
           "responses": {
             "200": {
-              "description": "",
+              "description": "Erfolgreich",
               "headers": {}
             },
             "403": {
