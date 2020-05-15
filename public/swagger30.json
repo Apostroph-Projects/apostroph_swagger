@@ -11,15 +11,19 @@
       "version": "1.0"
     },
     "servers": [
-      {
-        "url": "https://portal.apostroph.ch/rest/{version}",
-        "variables": {
-          "version": {
-            "default": "v1"
+        {
+          "url": "{baseurl}rest/{version}",
+          "variables": {
+            "version": {
+              "default": "v1"
+            },
+            "baseurl": {
+              "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+              "description": ""
+            }
           }
         }
-      }
-    ],
+      ],
     "paths": {
       "/translations": {
         "get": {
@@ -52,10 +56,14 @@
           "deprecated": false,
           "servers": [
             {
-              "url": "https://portal.apostroph.ch/rest/{version}",
+              "url": "{baseurl}rest/{version}",
               "variables": {
                 "version": {
                   "default": "v1"
+                },
+                "baseurl": {
+                  "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+                  "description": ""
                 }
               }
             }
@@ -108,10 +116,14 @@
           "deprecated": false,
           "servers": [
             {
-              "url": "https://portal.apostroph.ch/rest/{version}",
+              "url": "{baseurl}rest/{version}",
               "variables": {
                 "version": {
                   "default": "v1"
+                },
+                "baseurl": {
+                  "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+                  "description": ""
                 }
               }
             }
@@ -160,10 +172,14 @@
           "deprecated": false,
           "servers": [
             {
-              "url": "https://portal.apostroph.ch/rest/{version}",
+              "url": "{baseurl}rest/{version}",
               "variables": {
                 "version": {
                   "default": "v1"
+                },
+                "baseurl": {
+                  "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+                  "description": ""
                 }
               }
             }
@@ -216,10 +232,14 @@
           "deprecated": false,
           "servers": [
             {
-              "url": "https://portal.apostroph.ch/rest/{version}",
+              "url": "{baseurl}rest/{version}",
               "variables": {
                 "version": {
                   "default": "v1"
+                },
+                "baseurl": {
+                  "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+                  "description": ""
                 }
               }
             }
@@ -261,10 +281,14 @@
           "deprecated": false,
           "servers": [
             {
-              "url": "https://portal.apostroph.ch/rest/{version}",
+              "url": "{baseurl}rest/{version}",
               "variables": {
                 "version": {
                   "default": "v1"
+                },
+                "baseurl": {
+                  "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+                  "description": ""
                 }
               }
             }
@@ -291,10 +315,14 @@
           "deprecated": false,
           "servers": [
             {
-              "url": "https://portal.apostroph.ch/rest/{version}",
+              "url": "{baseurl}rest/{version}",
               "variables": {
                 "version": {
                   "default": "v1"
+                },
+                "baseurl": {
+                  "default": "https://portal.apostroph.ch:32443/ExtOrderServiceInteg/",
+                  "description": ""
                 }
               }
             }
@@ -416,11 +444,11 @@
           ],
           "type": "object",
           "properties": {
-            "TranslationId": {
+            "translationid": {
               "type": "string",
               "description": "ID der Übersetzung"
             },
-            "State": {
+            "state": {
               "$ref": "#/components/schemas/OrderState"
             }
           },
