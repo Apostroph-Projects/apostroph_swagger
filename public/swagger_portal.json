@@ -1,0 +1,1731 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "APOS.Web.WebAPI 1.0",
+    "contact": {
+      "name": "Apostroph Group AG",
+      "url": "https://www.apostrophgroup.ch/",
+      "email": "info@apostrophgroup.ch"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://test.myapostroph.ch/api"
+    }
+  ],
+  "paths": {
+    "/v1/Account/Login": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Tries to login the user and generates it's JWToken",
+        "requestBody": {
+          "description": "login credentials",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCredentials"
+              },
+              "example": {
+                "userName": "marketing@rhb.ch",
+                "password": "masterpw"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCredentials"
+              },
+              "example": {
+                "userName": "marketing@rhb.ch",
+                "password": "masterpw"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCredentials"
+              },
+              "example": {
+                "userName": "marketing@rhb.ch",
+                "password": "masterpw"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginCredentials"
+              },
+              "example": {
+                "userName": "marketing@rhb.ch",
+                "password": "masterpw"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/MachineTranslation/GetMtSourceLanguages": {
+      "get": {
+        "tags": [
+          "MachineTranslation"
+        ],
+        "summary": "Returns all available source languages of the MT mapped to apostroph language",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Language"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/MachineTranslation/GetMtTargetLanguages": {
+      "get": {
+        "tags": [
+          "MachineTranslation"
+        ],
+        "summary": "Returns all available target languages of the MT mapped to apostroph language",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Language"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/MachineTranslation/GetMachineTranslation": {
+      "post": {
+        "tags": [
+          "MachineTranslation"
+        ],
+        "summary": "Returns a translation",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMachineTranslationQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMachineTranslationQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMachineTranslationQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMachineTranslationQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranslationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/GetOrdersSmall": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Returns all the orders small",
+        "requestBody": {
+          "description": "filters for the query",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOrdersQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOrdersQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOrdersQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOrdersQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderSmall"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/GetMyOrdersSmall": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Returns all the orders small of th ecurretn user",
+        "requestBody": {
+          "description": "filters for the query",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMyLatestOrdersQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMyLatestOrdersQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMyLatestOrdersQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetMyLatestOrdersQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderSmall"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/GetOrder": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Returns a detailed order",
+        "parameters": [
+          {
+            "name": "idDisplay",
+            "in": "query",
+            "description": "Id display of the order",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/GetAvailableStates": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Returns all available states",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderState"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/GetOrderInvoice": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Return a byte with the file available states",
+        "parameters": [
+          {
+            "name": "orderIdApos",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AposFile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/GetFile": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Gets a single file as bytes. The file donwloaded is determined by the DownloadOrderFileQuery.Type property and /or the Filename",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DownloadOrderFileQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DownloadOrderFileQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DownloadOrderFileQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DownloadOrderFileQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AposFile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/CreateNewOrder": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Creates a new order",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/Copy": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Copies the order with the given",
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CopyOrderQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CopyOrderQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CopyOrderQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CopyOrderQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Orders/UploadSubsequentFiles": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Uploads a Subsequent files and send a notice to the service<br />\r\nThis is used when the order already has an orderIdApos",
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Orders/UploadMoreFiles": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Uploads a Subsequent files and send a notice to the service<br />\r\nThis is used when the order already has an orderIdApos",
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Orders/UploadNewOrderFiles": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Upload files for new Orders. puts it in the temporary folder with the users unterasdresse Id",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "unteradresseId": {
+                    "type": "integer"
+                  },
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Orders/DeleteFile": {
+      "delete": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Deletes a file form the temporary folder unteradresse id",
+        "parameters": [
+          {
+            "name": "unteradresseId",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uploadType",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Orders/DeleteUnterAddresseFiles": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Deletes all temporary files stored under unteradresseid",
+        "parameters": [
+          {
+            "name": "unteradresseId",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/v1/Sectors/GetSectorTypes": {
+      "get": {
+        "tags": [
+          "Sectors"
+        ],
+        "summary": "Returns a lidt of available sectortypes",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SectorType"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/Sectors/GetSector": {
+      "post": {
+        "tags": [
+          "Sectors"
+        ],
+        "summary": "Returns all available states",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSectorsQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSectorsQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSectorsQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSectorsQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Sector"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/ServiceTypes/GetServiceTypes": {
+      "post": {
+        "tags": [
+          "ServiceTypes"
+        ],
+        "summary": "Returns the ServiceTypeInfo which also contains the the list of service types",
+        "requestBody": {
+          "description": "contains the users language",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetServiceTypesQuery"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetServiceTypesQuery"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetServiceTypesQuery"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetServiceTypesQuery"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceTypeInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LoginCredentials": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string",
+            "description": "Username",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "description": "Password",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Credential for login"
+      },
+      "EnumAposUserType": {
+        "enum": [
+          0,
+          10,
+          20,
+          30
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "userType": {
+            "$ref": "#/components/schemas/EnumAposUserType"
+          },
+          "userRole": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "portalRoles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "portalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "portalName": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstname": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastname": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "hkId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "unteradresseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "adresseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeepLAllowed": {
+            "type": "boolean"
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AposFileIdentifier": {
+        "type": "object",
+        "properties": {
+          "fileTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fileIdentifierPrimary": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AposFile": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fileContentBytes": {
+            "type": "string",
+            "format": "byte",
+            "nullable": true
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "fileIdentifier": {
+            "$ref": "#/components/schemas/AposFileIdentifier"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Language": {
+        "type": "object",
+        "properties": {
+          "languageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "translationLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "deeplCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAMostUsedLanguage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMachineTranslationQuery": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceLang": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetLang": {
+            "type": "string",
+            "nullable": true
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Translation": {
+        "type": "object",
+        "properties": {
+          "detected_source_language": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TranslationResponse": {
+        "type": "object",
+        "properties": {
+          "translations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Translation"
+            },
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "usage": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EnumAposOrderType": {
+        "enum": [
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "GetOrdersQuery": {
+        "type": "object",
+        "properties": {
+          "filterDateStart": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterDateEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterDeliverDateStart": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterDeliverDateEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterOrderStatus": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "filterContactId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "filterTargetLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterSourceLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterFulltext": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectManagerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderType": {
+            "$ref": "#/components/schemas/EnumAposOrderType"
+          },
+          "aposIdLike": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "baseUploadPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUploadTempPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderInvoiceInfo": {
+        "type": "object",
+        "properties": {
+          "priceWithoutMwst": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceWithMwst": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isPDFAvailable": {
+            "type": "boolean"
+          },
+          "hasInvoice": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderSmall": {
+        "type": "object",
+        "properties": {
+          "orderIdApos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idDisplay": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "invoiceInfo": {
+            "$ref": "#/components/schemas/OrderInvoiceInfo"
+          },
+          "orderStatusId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isConfidential": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetMyLatestOrdersQuery": {
+        "type": "object",
+        "properties": {
+          "filterDateStart": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterDateEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterDeliverDateStart": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterDeliverDateEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "filterOrderStatus": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "filterContactId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "filterTargetLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterSourceLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "filterFulltext": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectManagerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderType": {
+            "$ref": "#/components/schemas/EnumAposOrderType"
+          },
+          "aposIdLike": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "baseUploadPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUploadTempPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderRowDisplay": {
+        "type": "object",
+        "properties": {
+          "orderRowId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sourceLanguageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetLanguageId": {
+            "type": "string",
+            "nullable": true
+          },
+          "sourceLanguageDisplayname": {
+            "type": "string",
+            "nullable": true
+          },
+          "targetLanguageDisplayname": {
+            "type": "string",
+            "nullable": true
+          },
+          "serviceTypeId": {
+            "type": "string",
+            "nullable": true
+          },
+          "serviceTypeDisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderDetailStatusId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deliveryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "orderIdApos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "orderInvoiceInfo": {
+            "$ref": "#/components/schemas/OrderInvoiceInfo"
+          },
+          "isOutputFileVisible": {
+            "type": "boolean"
+          },
+          "isBestOfferte": {
+            "type": "boolean"
+          },
+          "invoiceContactId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "orderStatusId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "targetLanguage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "sourceLanguage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "internReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "serviceTypeCustom": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sectorTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "targetAudience": {
+            "type": "string",
+            "nullable": true
+          },
+          "languageStyleId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deliveryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isExpress": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "commentsExport": {
+            "type": "string",
+            "nullable": true
+          },
+          "isConfidential": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "projectManagerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "createDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "orderTypeNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idDisplay": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorDisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "filesInputMetadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AposFile"
+            },
+            "nullable": true
+          },
+          "filesOutputMetadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AposFile"
+            },
+            "nullable": true
+          },
+          "filesAdditionalDeliveryMetadata": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AposFile"
+            },
+            "nullable": true
+          },
+          "orderRows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderRowDisplay"
+            },
+            "nullable": true
+          },
+          "projectManagerDisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceAddressExport": {
+            "type": "string",
+            "nullable": true
+          },
+          "contactAddressExport": {
+            "type": "string",
+            "nullable": true
+          },
+          "ratingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ratingComment": {
+            "type": "string",
+            "nullable": true
+          },
+          "ratingValue": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderState": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DownloadOrderFileQuery": {
+        "type": "object",
+        "properties": {
+          "fileIdentifier": {
+            "$ref": "#/components/schemas/AposFileIdentifier"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "orderIdApos": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "idDisplay": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUploadPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "baseUploadTempPath": {
+            "type": "string",
+            "nullable": true
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NewOrder": {
+        "type": "object",
+        "properties": {
+          "idDisplay": {
+            "type": "string",
+            "nullable": true
+          },
+          "isBestOfferte": {
+            "type": "boolean"
+          },
+          "invoiceContactId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "targetLanguage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "sourceLanguage": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "internReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "serviceTypeCustom": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sectorTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "targetAudience": {
+            "type": "string",
+            "nullable": true
+          },
+          "languageStyleId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deliveryDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isExpress": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "comments": {
+            "type": "string",
+            "nullable": true
+          },
+          "isConfidential": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "refsText": {
+            "type": "string",
+            "nullable": true
+          },
+          "filesTxt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateOrderModel": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/NewOrder"
+          },
+          "unteradresseId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "acceptService": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Object send in the request for creating a new order"
+      },
+      "CopyOrderQuery": {
+        "type": "object",
+        "properties": {
+          "idDisplay": {
+            "type": "string",
+            "nullable": true
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetSectorsQuery": {
+        "type": "object",
+        "properties": {
+          "sectorTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sector": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sectorTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetServiceTypesQuery": {
+        "type": "object",
+        "properties": {
+          "jwt": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceType": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameShort": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameRg": {
+            "type": "string",
+            "nullable": true
+          },
+          "sort": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "denySelectionIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "termsAndConditionKey": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceTypeInfo": {
+        "type": "object",
+        "properties": {
+          "availableServiceTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceType"
+            },
+            "nullable": true
+          },
+          "allowOtherServiceTypes": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}

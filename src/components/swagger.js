@@ -28,7 +28,7 @@ SwaggerUI.propTypes = {
 };
 
 SwaggerUI.defaultProps = {
-    url: `swagger30.json`
+    url: process.env.PUBLIC_URL + '/swagger_portal.json'
 };
 
 export default SwaggerUI;
