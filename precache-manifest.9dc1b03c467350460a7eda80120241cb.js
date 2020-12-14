@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "86ab43690d0beeeed2b965f89300cb01",
+    "revision": "a7f8675e1bfc5896d3ee173547b950a6",
     "url": "/apostroph_swagger/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/apostroph_swagger/static/css/2.e806ff4a.chunk.css"
   },
   {
-    "revision": "ceecaf9e38d6a602ddc0",
-    "url": "/apostroph_swagger/static/css/main.d1b05096.chunk.css"
+    "revision": "1615312164fd989b0970",
+    "url": "/apostroph_swagger/static/css/main.8ab6f918.chunk.css"
   },
   {
     "revision": "c0faebf1c5b50f7cda58",
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/apostroph_swagger/static/js/2.14c6018c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ceecaf9e38d6a602ddc0",
-    "url": "/apostroph_swagger/static/js/main.d6251922.chunk.js"
+    "revision": "1615312164fd989b0970",
+    "url": "/apostroph_swagger/static/js/main.f570ba2e.chunk.js"
   },
   {
     "revision": "e39cd65025d9c5616b4e",
