@@ -1,0 +1,2 @@
+check this, when path and query parameters are not working:
+https://github.com/swagger-api/swagger-ui/issues/5778#issuecomment-613909613

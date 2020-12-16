@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "https://test.myapostroph.ch/api"
+      "url": "http://localhost:59322/api"
     }
   ],
   "paths": {
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/v1/MachineTranslation/GetMtSourceLanguages": {
+    "/v1/MachineTranslation/MtSourceLanguages": {
       "get": {
         "tags": [
           "MachineTranslation"
@@ -99,7 +99,7 @@
         }
       }
     },
-    "/v1/MachineTranslation/GetMtTargetLanguages": {
+    "/v1/MachineTranslation/MtTargetLanguages": {
       "get": {
         "tags": [
           "MachineTranslation"
@@ -122,7 +122,7 @@
         }
       }
     },
-    "/v1/MachineTranslation/GetMachineTranslation": {
+    "/v1/MachineTranslation/Translation": {
       "post": {
         "tags": [
           "MachineTranslation"
@@ -166,7 +166,7 @@
         }
       }
     },
-    "/v1/Orders/GetOrdersSmall": {
+    "/v1/Orders/OrdersSmall": {
       "post": {
         "tags": [
           "Orders"
@@ -214,7 +214,7 @@
         }
       }
     },
-    "/v1/Orders/GetMyOrdersSmall": {
+    "/v1/Orders/MyOrdersSmall": {
       "post": {
         "tags": [
           "Orders"
@@ -262,7 +262,7 @@
         }
       }
     },
-    "/v1/Orders/GetOrder": {
+    "/v1/Orders/{idDisplay}": {
       "get": {
         "tags": [
           "Orders"
@@ -271,11 +271,12 @@
         "parameters": [
           {
             "name": "idDisplay",
-            "in": "query",
+            "in": "path",
             "description": "Id display of the order",
             "schema": {
               "type": "string"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -292,7 +293,7 @@
         }
       }
     },
-    "/v1/Orders/GetAvailableStates": {
+    "/v1/Orders/AvailableStates": {
       "get": {
         "tags": [
           "Orders"
@@ -315,7 +316,7 @@
         }
       }
     },
-    "/v1/Orders/GetOrderInvoice": {
+    "/v1/Orders/Invoice/{orderIdApos}": {
       "get": {
         "tags": [
           "Orders"
@@ -324,11 +325,12 @@
         "parameters": [
           {
             "name": "orderIdApos",
-            "in": "query",
+            "in": "path",
             "schema": {
               "type": "integer",
               "format": "int32"
-            }
+            },
+            "required": true
           }
         ],
         "responses": {
@@ -345,7 +347,7 @@
         }
       }
     },
-    "/v1/Orders/GetFile": {
+    "/v1/Orders/File": {
       "post": {
         "tags": [
           "Orders"
@@ -388,9 +390,69 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Deletes a file form the temporary folder unteradresse id",
+        "parameters": [
+          {
+            "name": "unteradresseId",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uploadType",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Deletes all temporary files stored under unteradresseid",
+        "parameters": [
+          {
+            "name": "unteradresseId",
+            "in": "query",
+            "description": "",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success"
+          }
+        }
       }
     },
-    "/v1/Orders/CreateNewOrder": {
+    "/v1/Orders": {
       "post": {
         "tags": [
           "Orders"
@@ -479,7 +541,7 @@
         }
       }
     },
-    "/v1/Orders/UploadSubsequentFiles": {
+    "/v1/Orders/SubsequentFiles": {
       "post": {
         "tags": [
           "Orders"
@@ -492,7 +554,7 @@
         }
       }
     },
-    "/v1/Orders/UploadMoreFiles": {
+    "/v1/Orders/MoreOrderFiles": {
       "post": {
         "tags": [
           "Orders"
@@ -505,7 +567,7 @@
         }
       }
     },
-    "/v1/Orders/UploadNewOrderFiles": {
+    "/v1/Orders/NewOrderFiles": {
       "post": {
         "tags": [
           "Orders"
@@ -539,71 +601,7 @@
         }
       }
     },
-    "/v1/Orders/DeleteFile": {
-      "delete": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "Deletes a file form the temporary folder unteradresse id",
-        "parameters": [
-          {
-            "name": "unteradresseId",
-            "in": "query",
-            "description": "",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "fileName",
-            "in": "query",
-            "description": "",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "uploadType",
-            "in": "query",
-            "description": "",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/v1/Orders/DeleteUnterAddresseFiles": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "summary": "Deletes all temporary files stored under unteradresseid",
-        "parameters": [
-          {
-            "name": "unteradresseId",
-            "in": "query",
-            "description": "",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/v1/Sectors/GetSectorTypes": {
+    "/v1/Sectors/SectorTypes": {
       "get": {
         "tags": [
           "Sectors"
@@ -626,7 +624,7 @@
         }
       }
     },
-    "/v1/Sectors/GetSector": {
+    "/v1/Sectors/Sector": {
       "post": {
         "tags": [
           "Sectors"
@@ -673,7 +671,7 @@
         }
       }
     },
-    "/v1/ServiceTypes/GetServiceTypes": {
+    "/v1/ServiceTypes": {
       "post": {
         "tags": [
           "ServiceTypes"
@@ -1716,10 +1714,10 @@
     },
     "securitySchemes": {
       "Bearer": {
-        "type": "apiKey",
+        "type": "http",
         "description": "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
-        "name": "Authorization",
-        "in": "header"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   },
